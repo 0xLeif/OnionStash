@@ -152,9 +152,7 @@ final class OnionStashTests: XCTestCase {
     
     try! store.first?.storeOnions()
     
-    var loadedStash = OnionStash<A>()
-    
-    try! loadedStash.loadOnions()
+    let loadedStash = try! OnionStash<A>.loadOnionStash()
     
     XCTAssertEqual(loadedStash, (store.first as? OnionStash<A>))
   }
