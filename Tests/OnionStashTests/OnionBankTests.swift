@@ -33,6 +33,7 @@ final class OnionBankTests: XCTestCase {
     var bank = OnionBank(
       stashableOnionTypes: OnionStash<A>.self, OnionStash<B>.self
     )
+    try! bank.deleteAll()
     
     XCTAssertEqual(bank.all.count, 2)
     

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Chronicle",
+        "repositoryURL": "https://github.com/0xLeif/Chronicle",
+        "state": {
+          "branch": null,
+          "revision": "5d5e80f63943969eb2c33d686958b3938536a455",
+          "version": "0.2.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

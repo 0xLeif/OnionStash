@@ -41,7 +41,7 @@ extension OnionStash: OnionStoring {
   
   public mutating func add<OnionValue>(value: OnionValue) where OnionValue : Layerable, OnionValue : Decodable, OnionValue : Encodable {
     guard let value = value as? Value else {
-      fatalError()
+      chrono.log(level: .error("\(#function): value (of type \(OnionValue.self)) is not of type \(Value.self)", nil))
       return
     }
     
@@ -50,7 +50,7 @@ extension OnionStash: OnionStoring {
   
   public mutating func add<OnionValue>(values: [OnionValue]) where OnionValue : Layerable, OnionValue : Decodable, OnionValue : Encodable {
     guard let values = values as? [Value] else {
-      fatalError()
+      chrono.log(level: .error("\(#function): value (of type \(OnionValue.self)) is not of type \(Value.self)", nil))
       return
     }
     
@@ -61,7 +61,7 @@ extension OnionStash: OnionStoring {
   
   public mutating func remove<OnionValue>(value: OnionValue) where OnionValue : Layerable, OnionValue : Decodable, OnionValue : Encodable {
     guard let value = value as? Value else {
-      fatalError()
+      chrono.log(level: .error("\(#function): value (of type \(OnionValue.self)) is not of type \(Value.self)", nil))
       return
     }
     
@@ -70,7 +70,7 @@ extension OnionStash: OnionStoring {
   
   public mutating func remove<OnionValue>(values: [OnionValue]) where OnionValue : Layerable, OnionValue : Decodable, OnionValue : Encodable {
     guard let values = values as? [Value] else {
-      fatalError()
+      chrono.log(level: .error("\(#function): value (of type \(OnionValue.self)) is not of type \(Value.self)", nil))
       return
     }
     

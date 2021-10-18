@@ -35,7 +35,7 @@ public extension OnionBank {
   
   mutating func add<Value: Equatable>(value: Value) where Value: Codable, Value: Layerable {
     guard let index = all.firstIndex(where: { $0 is OnionStash<Value> }) else {
-      fatalError()
+      chrono.log(level: .error("\(#function): Could not find OnionStash of type \(Value.self)", nil))
       return
     }
     
