@@ -1,3 +1,5 @@
+public typealias 🧅🏦 = OnionBank
+
 public struct OnionBank {
   private var stashableOnionTypes: [OnionStashable.Type]
   public var all: [OnionStashable]

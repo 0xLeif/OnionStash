@@ -1,3 +1,5 @@
+public typealias 🧅🧅🧅 = OnionStash
+
 public struct OnionStash<Value: Equatable>: Codable, Equatable where Value: Codable, Value: Layerable {
   public var onionSet: Set<Onion<Value>>
   
