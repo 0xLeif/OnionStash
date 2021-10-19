@@ -91,7 +91,7 @@ final class OnionStashTests: XCTestCase {
     stash.add(value: someUser)
     stash.add(value: someUser)
     
-    XCTAssertEqual(stash.onions.count, 1)
+    XCTAssertEqual(stash.onionSet.count, 1)
     
     XCTAssertNotNil(stash.onion(forID: someUser.id))
     
@@ -100,18 +100,66 @@ final class OnionStashTests: XCTestCase {
         .map { i in User(name: "Anon", isRegistered: i.isMultiple(of: 2)) }
     )
     
-    XCTAssertEqual(stash.onions.count, 100000)
+    XCTAssertEqual(stash.onionSet.count, 100000)
     
-//    measure {
-      XCTAssertEqual(stash.onions(forType: "User.Registered").count, 50001)
-//    }
+    //    measure {
+    XCTAssertEqual(stash.onions(forType: "User.Registered").count, 50001)
+    //    }
     
     measure {
       XCTAssertEqual(stash.onions(forMetaKey: "tag", andValue: "1").count, 1)
     }
   }
   
+  func testOnionStashCollection() {
+    struct A: Layerable, Codable, Equatable {
+      var id = UUID().uuidString
+      
+      var value: String
+      
+      func idLayer() -> String {
+        id
+      }
+      
+      func valueLayer() -> Data {
+        value.data(using: .utf8)!
+      }
+    }
+    struct B: Layerable, Codable, Equatable {
+      var id = UUID().uuidString
+      
+      var value: String
+      
+      func idLayer() -> String {
+        id
+      }
+      
+      func valueLayer() -> Data {
+        value.data(using: .utf8)!
+      }
+    }
+    
+    let store: [OnionStoring] = [
+      OnionStash<A>(
+        onions: [
+          Onion(A(value: "First")),
+          Onion(A(value: "Second")),
+          Onion(A(value: "Third"))
+        ]
+      ),
+      OnionStash<B>()
+    ]
+    
+    try! store.first?.storeOnions()
+    
+    let loadedStash = try! OnionStash<A>.loadOnionStash()
+    
+    XCTAssertEqual(loadedStash, (store.first as? OnionStash<A>))
+  }
+  
   static var allTests = [
     ("testExample", testExample),
+    ("testStash", testStash),
+    ("testOnionStashCollection", testOnionStashCollection)
   ]
 }
